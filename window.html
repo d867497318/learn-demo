@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 此时声明的全局变量a会挂载到window上
+        var a = 123;
+        console.log(window)
+        // 此时我们赋值的a属性会覆盖掉之前的123
+        window.a = 456;
+        console.log(window)
+        // let命令、const命令、class命令声明的全局变量，不属于顶层对象的属性，
+        // 也就是说，从 ES6 开始，全局变量将逐步与顶层对象的属性脱钩。
+        let test = '我不挂载到全局'
+        const test1 = '我也不挂载到全局'
+        console.log(window);
+
+        // 不管在那种环境下都会返回 全局对象
+        console.log(globalThis)
+    </script>
+</body>
+
+</html>

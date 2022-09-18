@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 对象的结构赋值与数组最大的不同在于
+        // 数组的元素是按次序排序的结构出的变量由他的位置决定，
+        // 而对象没有次序结构的变量必须跟属性同名才能取到正确的值
+        let { foo, bar } = { foo: 'foo', bar: 'bar' }
+        console.log(foo, bar);
+
+        // 因为对象中的属性根本没有叫baz的属性所以结构失败baz的结构为undefined
+        let { baz } = { foo: 'foo', bar: 'bar' }
+        console.log(baz);
+
+        // 对象的结构赋值可以很方便的将对象的现有方法赋值到变量中
+        const { log } = console
+        log('从console对象中结构出log方法并且使用')
+
+        // 如果变量名跟属性名不一致可以这样
+        const { foo: newFoo } = { foo: 'foo' }
+        console.log(newFoo);
+
+        // 重命名为 f l
+        let { first: f, last: l } = { first: 'first', last: 'last' }
+        console.log(f, l);
+
+        let obj = {
+            p: ['hellow', { name: "world" }]
+        }
+        // 在此例中p是模式 不是变量所以不会被赋值
+        const { p, p: [hellow, { name }] } = obj
+        console.log(hellow, name, p);
+
+        // 下面代码有三次解构赋值，分别是对loc、start、limit三个属性的解构赋值。
+        // 注意，最后一次对limit属性的解构赋值之中，只有line是变量，loc和start都是模式，不是变量
+        const node = {
+            loc: {
+                start: {
+                    limit: 1,
+                    column: 5
+                }
+            }
+        }
+        let { loc, loc: { start, start: { limit } } } = node
+        console.log(loc, start, limit);
+        // let arr1 = []
+        // let obj1 = {}
+
+        // ({foo:obj.props,bar:arr1[0]}) = {foo:'123',bar:true}
+        // console.log(obj1,arr1);
+
+        // 结构赋值可能结构出原型上的属性
+        let obj1 = {}
+        let obj2 = { foo1: "foo" }
+        // 设置obj1的原型对象是obj2
+        Object.setPrototypeOf(obj1, obj2)
+        const { foo1 } = obj1
+
+        console.log(foo1, obj1);
+
+        // 对象结构也可以使用默认值
+        const { newFoo1 = '123' } = {}
+        console.log(newFoo1);
+
+        let { x, y = 2 } = { x: 1 }
+        console.log(x, y);
+
+        // 如果你想使用默认值也想更改赋值变量
+
+        let { x: newX = 1 } = { x: 5 }
+        console.log(newX);
+
+        const { name: label } = { name: 'xiaoming' }
+        console.log(label);
+
+        // 跟数组同理如果默认值想要生效 属性名必须严格等于undefine
+        // const {age:_age=18} = {age:undefined}
+        // console.log(_age);
+        const { age: _age = 18 } = { age: null }
+        console.log(_age);
+
+        let variable = null;
+        ({name:variable} = {name:'xiaoxiao'})
+        console.log(variable);
+
+        // 由于数组也是一个特殊的对象所以数组也可以像对象一样结构
+        let arrObj = [1,2,3]
+        // [arrObj.length-1] 为属性名表达式 也就是2属性
+        let {0:first,[arrObj.length-1]:last} = arrObj
+        console.log(first,last);
+    </script>
+</body>
+
+</html>
