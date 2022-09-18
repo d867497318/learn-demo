@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Person {
+            constructor(brain){
+                this.brain = brain
+                this.others = {
+                    other1:1,
+                    other2:2
+                }
+                this.setBrain = function () {
+                    console.log('set brain')
+                }
+            }
+            getBrain() {
+                console.log(this.brain)
+            }
+            age = 100
+            like = {
+                color:'red'
+            }
+        }
+
+        class JoestarFamily extends Person {
+            constructor(name){
+                super('smart')
+                this.name = name
+                this.sayName = function () {
+                    console.log(this.name)
+                }
+            }
+            sayHello(){
+
+            }
+        }
+
+        var johnny = new JoestarFamily('johnny')
+
+        console.log(johnny)
+    </script>
+</body>
+</html>

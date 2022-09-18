@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person () {
+            this.brain = 'smart'
+        }
+
+        Person.prototype.getBrain = function () {
+            console.log(this.brain)
+        }
+
+        Person.prototype.age = 100
+
+        Person.prototype.like = {
+            color:'red'
+        }
+
+        function JoestarFamily(name){
+            this.name = name
+            this.sayName = function () {
+                console.log(this.name)
+            }
+        }
+
+        // 等同于 JoestarFamily.prototype === 实例.__proto__ === Person.prototype
+        JoestarFamily.prototype = new Person()
+
+        // 等同于 johnny.__proto__ === JoestarFamily.prototype
+        // 也就是说 johnny.__proto__.__proto__ === Person.prototype
+        var johnny = new JoestarFamily('johnny')
+
+        var elaine = new JoestarFamily('elaine')
+
+        // 注意所谓继承，是继承父类属性和方法。如果你在子类原型上添加对象属性,并修改对象属性中的某值,照样会影响所有的实例
+        johnny.age = 1
+        
+        johnny.like.color = 'yellow'
+
+        console.log(johnny)
+
+        console.log(elaine)
+    </script>
+</body>
+</html>

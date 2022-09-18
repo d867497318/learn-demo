@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(brain) {
+            this.brain = brain
+
+            this.others = {
+                other1:1,
+                other2:2
+            }
+
+            this.setBrain = function () {
+                console.log('set brain')
+            }
+        }
+
+        Person.prototype.getBrain = function () {
+            console.log(this.brain)
+        }
+
+        Person.prototype.age = 100
+
+        Person.prototype.like= {
+            color:'red'
+        }
+
+        function JoestarFamily(name) {
+            this.name = name
+            this.sayName = function() {
+                console.log(this.name)
+            }
+            Person.call(this,'smart')
+        }
+
+        // // 核心代码
+        // var F = function() {} 
+        
+        // // 核心代码
+        // F.prototype = Person.prototype
+
+        // JoestarFamily.prototype = new F()
+
+        Object.setPrototypeOf(JoestarFamily.prototype,Person.prototype)
+
+        // 原型的 constructor 指回原来的构造函数
+        // JoestarFamily.prototype.constructor = JoestarFamily 
+
+        JoestarFamily.prototype.sayHello = function(){}
+
+        var johnny = new JoestarFamily('johnny')
+
+        console.log(johnny)
+    </script>
+</body>
+</html>

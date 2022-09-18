@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(brain) {
+            this.brain = brain
+
+            this.others = {
+                others1:1,
+                others2:2
+            }
+
+            this.setBrain = function() {
+                console.log('set brain')
+            }
+        }
+
+        Person.prototype.getBrain = function () {
+            console.log('set brain')
+        }
+
+        Person.prototype.age = 100
+
+        Person.prototype.like = {
+            color:'red'
+        }
+
+        function JoestarFamily(name) {
+            this.name = name
+            this.sayName = function() {
+                console.log(this.name)
+            }
+            Person.call(this,'smart')
+        }
+
+        // 等同于 JoestarFamily.prototype === 实例.__proto__ === Person.prototype
+        JoestarFamily.prototype = new Person()
+
+        // 原型的constructor指回原来的构造函数
+        JoestarFamily.prototype.constructor = JoestarFamily
+
+        JoestarFamily.prototype.sayHello = function () {
+
+        }
+
+        var johnny = new JoestarFamily('johnny')
+        var elaine = new JoestarFamily('elaine')
+
+        console.log(johnny.age)
+        johnny.getBrain()
+        console.log(johnny,elaine)
+
+        // 这样的写法解决了引用修改的问题，也可以拿到父类原型上的属性
+        // 但是有一个问题是不管在什么情况下都会调用两次父类构造函数
+            // 一次是在设置子类原型的时候
+            // 一次是创建子类的时候
+
+    </script>
+</body>
+</html>

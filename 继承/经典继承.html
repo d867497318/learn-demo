@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(brain){
+            this.brain = brain
+
+            this.others = {
+                other1:1,
+                other2:2
+            }
+
+            this.setBrain = function () {
+                console.log('set brain')
+            }
+        }
+
+        Person.prototype.getBrain = function () {
+            console.log(this.brain)
+        }
+
+        Person.prototype.age = 100
+
+        Person.prototype.like = {
+            color:'red'
+        }
+
+        function JoestarFamily(name) {
+            this.name = name
+            this.sayName = function() {
+                console.log(this.name)
+            }
+            Person.call(this,'smart')
+        }
+
+        var johnny = new JoestarFamily('johnny')
+        var elaine = new JoestarFamily('elaine')
+
+
+        // 注意所谓继承，是继承父类属性和方法。如果你在子类原型上添加对象属性,并修改对象属性中的某值,照样会影响所有的实例
+        // 但是本实例父类的属性方法有函数生成 每一实例化会调用一次构造函数JoestarFamily每一次调用构造函数JoestarFamily，就会调用Person.call(this,'smart')拿到超类的属性 每次都会生成新的对象
+        johnny.others.others1 = 123
+
+        // johnny.getBrain()
+        console.log(johnny,elaine)
+
+
+        // 优点
+        //   1 解决了原型链中子类实例共享父类引用属性的问题
+        //   2 创建子类实例，可以向父类传递参数
+        //   3 可以实现多继承（call多个父类对象）
+
+        // 缺点
+        // 1 实例并不是父类的实例，只是子类的实例
+        //     .即 johnny instanceof JoestarFamily 为 true
+        //     .johnny instanceof Person 为 false
+        //     .因为只是借用父类的函数和方法而非继承它
+        // 2 只能继承父类的属性和方法,不能继承父类原型属性和方法
+        // 3 占用内存,每个子类都有父类的属性和方法（一摸一样）,影响性能
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function createObj(obj) {
+            var clone = Object.create(obj)
+            clone.sayHello = function() {
+                console.log('hello')
+            }
+            return clone
+        }
+
+        let person = {
+            name:'johnny',
+            age:22
+        }
+
+        let anotherPerson = createObj(person)
+        anotherPerson.sayHello()
+
+        // 优点 无
+        // 缺点 1.只适用对象，与构造函数继承无关
+        //      2.和借用构造函数模式一样，无法实现函数复用,每次创建对象都会创建一遍方法
+</script>
+</body>
+</html>

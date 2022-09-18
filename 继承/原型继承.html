@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(brain) {
+            this.brain = brain
+
+            this.others = {
+                other1:1,
+                other2:2
+            }
+
+            this.setBrain = function () {
+                console.log('set brain')
+            }
+        }
+
+        Person.prototype.getBrain = function(){
+            console.log(this.brain)
+        }
+
+        Person.prototype.age = 100
+        Person.prototype.like = {
+            color:'red'
+        }
+
+        function JoestarFamily(name) {
+            this.name = name
+            this.sayName - function() {
+                console.log(this.name)
+            }
+        }
+
+        // 重新赋值原型 原先JoestarFamily.prototype 上的constructor 被抹除
+        // new 带来的关系是 实例.__proto__ === 构造函数.prototype
+        // Object.create 的则是：实例.__proto__ === 传入的对象
+        // JoestarFamily.prototype = Object.create(Person.prototype)
+
+        // JoestarFamily.prototype.constructor = JoestarFamily
+
+        // 用这样的方式继承还是无法拿到父类构造函数的属性
+        Object.setPrototypeOf(JoestarFamily.prototype,Person.prototype)
+
+        var johnny = new JoestarFamily('johny')
+
+        var elaine = new JoestarFamily('elaine')
+
+        console.log(johnny,elaine)
+
+        // 这个案例传入的对象是Person.prototype,所以就有了johnny.__proto__ === Person.prototype,它
+        // 继承自传入的对象，而不像前三种继承，继承构造函数的原型（因为new）
+
+
+
+        // 优点 1.易于理解
+
+        // 缺点 1.原型重新赋值后需要将constructor重新赋值回来
+        //      2.不能实现（子）类与（父）类的继承,只能实现对象的继承
+        //      3.原型对象的引用属性会被多实例共享,不管是私有还是共有属性
+        //      4.构造函数中的属性和方法无法被继承
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Shape(){
+            this.size = 20
+            this.width = 100
+            this.height = 100
+        }
+        Shape.prototype.move = function () {
+            this.size += this.size
+            this.width += this.width
+            console.info('Shape move.')
+        }
+        function Rectangle(){
+            Shape.call(this)
+        }
+        Rectangle.prototype = Object.create( Shape.prototype)
+        // Rectangle.prototype.constructor = Rectangle
+        var rect = new Rectangle();
+
+        console.log(rect instanceof Rectangle)
+        console.log(rect instanceof Shape)
+        rect.move(1, 1)
+    </script>
+</body>
+</html>
