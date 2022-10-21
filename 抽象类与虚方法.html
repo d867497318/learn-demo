@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        Object.extend = function(destination,source) {
+            for(property in source){
+                destination[property] = source[property]
+            }
+            return destination
+        }
+
+        Object.prototype.extend = function(object){
+            return Object.extend.apply(this,[this,object])
+        }
+
+        function base(){}
+
+        base.prototype = {
+            initialize:function(){
+                this.oninit()
+            }
+        }
+
+        function class1(){
+
+        }
+
+        class1.prototype = (new base()).extend({
+            oninit:function(){
+                
+            }
+        })
+    </script>
+</body>
+</html>

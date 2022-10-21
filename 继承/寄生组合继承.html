@@ -47,7 +47,9 @@
 
         // JoestarFamily.prototype = new F()
 
-        Object.setPrototypeOf(JoestarFamily.prototype,Person.prototype)
+        // Object.setPrototypeOf(JoestarFamily.prototype,Person.prototype)
+
+        JoestarFamily.prototype = Person.prototype
 
         // 原型的 constructor 指回原来的构造函数
         // JoestarFamily.prototype.constructor = JoestarFamily 
