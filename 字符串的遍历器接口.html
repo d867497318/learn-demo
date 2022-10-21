@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 字符串可以被for of循环 
+        let str = 'hellow world'
+        for (let codePoint of str) {
+            console.log(codePoint);
+        }
+        // for of 最大的优点在于可以识别最大的码点
+        let text = String.fromCodePoint(0x20BB7);
+        // for (let i = 0; i < text.length; i++) {
+        //     console.log(text[i]);
+        // }
+        for (let i of text) {
+            console.log(i);
+        }
+    </script>
+</body>
+
+</html>

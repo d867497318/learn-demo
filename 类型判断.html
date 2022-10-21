@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 基本类型 / 值类型 / 原始值 / 原始类型
+        var null1 = null
+        var undefined1 = undefined
+        var string1 = 'foo'
+        var number1 = Number('10')
+        var boolean1 = Boolean(true)
+        var symbol1 = Symbol('foo')
+        console.log(typeof null1) // object需要注意
+        console.log(typeof undefined1) // undefined
+        console.log(typeof string1) // string
+        console.log(typeof number1) // number
+        console.log(typeof boolean1) // boolean
+        console.log(typeof symbol1) // symbol
+
+        var myString = new String('male')
+        var myNumber = new Number(23)
+        var myBoolean = new Boolean(false)
+        var myObject = new Object()
+        var myArray = new Array('foo', 'bar')
+        var myFunction = new Function('x', 'y', 'return x * y')
+        var myDate = new Date()
+        var myRegExp = new RegExp('\\bt[a-z]+\\b')
+        var myError = new Error('error')
+
+        console.log(typeof myString) // 输出 object
+        console.log(typeof myNumber) // 输出 object
+        console.log(typeof myBoolean) // 输出 object
+        console.log(typeof myObject) // 输出 object
+        console.log(typeof myArray) // 输出 object
+        console.log(typeof myFunction) // 输出 function
+        console.log(typeof myDate) // 输出object
+        console.log(typeof myRegExp) // 输出 object
+        console.log(typeof myError) // 输出object
+
+        // typeof XXX 和typeof(XXX) 一个意思
+
+        // 值类型使用typeof没有问题但是引用类型就会有问题
+
+        function People(name, age) {
+            this.name = name
+            this.age = age
+        }
+        const elaine = new People('elaine', 23)
+        console.log(elaine instanceof People)
+        console.log(elaine instanceof Object)
+
+        function isType(source) {
+            const target = Object.prototype.toString.call(source);
+            switch (target) {
+                case "[object Null]":
+                    return 'null';
+                case "[object Undefined]":
+                    return 'undefined';
+                case "[object String]":
+                    return 'string';
+                case "[object Number]":
+                    return 'number';
+                case "[object Boolean]":
+                    return 'boolean';
+                case "[object Object]":
+                    return 'object';
+                case "[object Array]":
+                    return 'array';
+                case "[object Function]":
+                    return 'function';
+                case "[object Date]":
+                    return 'date';
+                case "[object RegExp]":
+                    return 'regexp';
+                case "[object Error]":
+                    return 'error'
+            }
+        }
+
+        function getType(target) {
+            return Object.prototype.toString.call(target);
+        }
+    </script>
+</body>
+
+</html>
