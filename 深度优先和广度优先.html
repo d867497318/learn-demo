@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let data = {
+            value: 1,
+            children: [
+                { 
+                    value: 2,
+                    children: [
+                        { value: 4 }, 
+                        { value: 5 }
+                    ] 
+                },
+                { 
+                    value: 3,
+                    children: [
+                        { 
+                            value: 6,
+                            children: [
+                                {value:8},
+                                {value:9}
+                            ]
+                        }, 
+                        {
+                            value:7
+                        }
+                    ] 
+                }
+            ]
+        }
+    // 深度优先就是一直往下找 下边没有了找相邻的
+    // 一直往下找
+    
+    // function walk(obj){
+    //     console.log(obj.value)
+    //     if(obj.children){
+    //         obj.children.forEach(element => {
+    //             walk(element)
+    //         });
+    //     }
+    // }
+
+    // walk(data)
+
+    // 广度优先
+
+    data = [data]
+    let tempParam = []
+    function walk2(arr){
+        tempParam = []
+        arr.forEach(item=>{
+            console.log(item.value)
+            if(item.children){
+                // 遍历到一个层级时会将所有的子集都拼接到tempParam，然后进行回调
+                tempParam = tempParam.concat(item.children)
+                console.log(tempParam)
+            }
+        })
+        if(tempParam.length){
+            walk2(tempParam)
+        }
+    }
+
+    walk2(data)
+    </script>
+</body>
+
+</html>
